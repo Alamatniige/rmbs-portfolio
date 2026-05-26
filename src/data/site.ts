@@ -4,7 +4,7 @@ export const siteConfig = {
   /** Update with your inbox — used for mailto contact form */
   contactEmail: "sapioruiz27@gmail.com",
   /** Place your PDF at public/resume.pdf (or change this path) */
-  resumePath: "/resume.pdf",
+  resumePath: "/Sapio-Resume.pdf",
 } as const;
 
 export const navLinks = [

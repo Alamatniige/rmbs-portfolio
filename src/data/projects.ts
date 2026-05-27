@@ -102,7 +102,7 @@ export const projects: Project[] = [
     tags: ["Mobile Application", "Backend Developer"],
   },
   // BLES
-  {/*
+  /*
   {
     id: "bles",
     title: "BLES Web Portal",
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     ],
     tags: ["Website", "Frontend Developer"],
   },
-  */}
+  */
 ];
 
 /** Newest first, oldest last */

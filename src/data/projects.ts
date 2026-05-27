@@ -11,6 +11,7 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  // Budde Roofing
   {
     id: "budde-roofing",
     title: "Budde Roofing",
@@ -25,6 +26,7 @@ export const projects: Project[] = [
     tags: ["Website", "Frontend Developer"],
     liveUrl: "https://budderoofingandgutters.ca/",
   },
+  // Designers Circle
   {
     id: "designers-circle",
     title: "Designers Circle",
@@ -39,6 +41,7 @@ export const projects: Project[] = [
     tags: ["Website", "Frontend Developer"],
     liveUrl: "https://designerscircle.co.uk/",
   },
+  // Izaj Web
   {
     id: "izaj-web",
     title: "Izaj E-Commerce Web Application",
@@ -53,6 +56,7 @@ export const projects: Project[] = [
     tags: ["E-Commerce Website", "Backend Developer"],
     liveUrl: "https://izaj-ecommerce.vercel.app/",
   },
+  // Izaj Desktop
   {
     id: "izaj-desktop",
     title: "Izaj Desktop Application",
@@ -67,6 +71,7 @@ export const projects: Project[] = [
     ],
     tags: ["Desktop Application", "Backend Developer"],
   },
+  // Mira
   {
     id: "mira-web",
     title: "MIRA Admin Web Application",
@@ -82,6 +87,7 @@ export const projects: Project[] = [
     tags: ["Website", "Backend Developer"],
     liveUrl: "https://mira-sys.vercel.app/",
   },
+  // Tech Hub
   {
     id: "tech-hub",
     title: "TechHub Mobile Application",
@@ -95,6 +101,8 @@ export const projects: Project[] = [
     ],
     tags: ["Mobile Application", "Backend Developer"],
   },
+  // BLES
+  {/*
   {
     id: "bles",
     title: "BLES Web Portal",
@@ -110,6 +118,7 @@ export const projects: Project[] = [
     ],
     tags: ["Website", "Frontend Developer"],
   },
+  */}
 ];
 
 /** Newest first, oldest last */

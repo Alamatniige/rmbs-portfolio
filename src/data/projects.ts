@@ -19,9 +19,18 @@ export const projects: Project[] = [
     description:
       "A business website for a roofing company to showcase their services and portfolio. Built with Next.js, Node.js, and TypeScript.",
     images: [
-      { src: "/projects/budde-roofing/budde1.png", alt: "Budde Roofing homepage" },
-      { src: "/projects/budde-roofing/budde2.png", alt: "Budde Roofing services" },
-      { src: "/projects/budde-roofing/budde3.png", alt: "Budde Roofing contact" },
+      {
+        src: "/projects/budde-roofing/budde1.png",
+        alt: "Budde Roofing homepage",
+      },
+      {
+        src: "/projects/budde-roofing/budde2.png",
+        alt: "Budde Roofing services",
+      },
+      {
+        src: "/projects/budde-roofing/budde3.png",
+        alt: "Budde Roofing contact",
+      },
     ],
     tags: ["Website", "Frontend Developer"],
     liveUrl: "https://budderoofingandgutters.ca/",
@@ -34,9 +43,18 @@ export const projects: Project[] = [
     description:
       "A trading platform for interior designers to create a schedule for their clients. Built with Next.js, Node.js, and TypeScript.",
     images: [
-      { src: "/projects/designers-circle/dc1.png", alt: "Designers Circle landing" },
-      { src: "/projects/designers-circle/dc2.png", alt: "Designers Circle gallery" },
-      { src: "/projects/designers-circle/dc3.png", alt: "Designers Circle detail" },
+      {
+        src: "/projects/designers-circle/dc1.png",
+        alt: "Designers Circle landing",
+      },
+      {
+        src: "/projects/designers-circle/dc2.png",
+        alt: "Designers Circle gallery",
+      },
+      {
+        src: "/projects/designers-circle/dc3.png",
+        alt: "Designers Circle detail",
+      },
     ],
     tags: ["Website", "Frontend Developer"],
     liveUrl: "https://designerscircle.co.uk/",
@@ -64,10 +82,22 @@ export const projects: Project[] = [
     description:
       "A dedication desktop application for IZAJ to manage their products that are used in their e-commerce platform. Built with React, Tailwind CSS, Tauri, and TypeScript.",
     images: [
-      { src: "/projects/izaj-desktop/izajdesktop4.png", alt: "Izaj Desktop settings" },
-      { src: "/projects/izaj-desktop/izajdesktop1.png", alt: "Izaj Desktop main" },
-      { src: "/projects/izaj-desktop/izajdesktop2.png", alt: "Izaj Desktop workspace" },
-      { src: "/projects/izaj-desktop/izajdesktop3.png", alt: "Izaj Desktop module" },
+      {
+        src: "/projects/izaj-desktop/izajdesktop4.png",
+        alt: "Izaj Desktop settings",
+      },
+      {
+        src: "/projects/izaj-desktop/izajdesktop1.png",
+        alt: "Izaj Desktop main",
+      },
+      {
+        src: "/projects/izaj-desktop/izajdesktop2.png",
+        alt: "Izaj Desktop workspace",
+      },
+      {
+        src: "/projects/izaj-desktop/izajdesktop3.png",
+        alt: "Izaj Desktop module",
+      },
     ],
     tags: ["Desktop Application", "Backend Developer"],
   },
@@ -102,14 +132,13 @@ export const projects: Project[] = [
     tags: ["Mobile Application", "Backend Developer"],
   },
   // BLES
-  /*
   {
     id: "bles",
     title: "BLES Web Portal",
     createdAt: "2025-11-01",
     description:
-        "A web portal for BLES staff to manage their students and for students to submit an application for admission. Built with SvelteKit.",
-      images: [
+      "A web portal for BLES staff to manage their students and for students to submit an application for admission. Built with SvelteKit.",
+    images: [
       { src: "/projects/bles/bles-1.png", alt: "BLES overview" },
       { src: "/projects/bles/bles-2.png", alt: "BLES listing" },
       { src: "/projects/bles/bles-3.png", alt: "BLES detail" },
@@ -118,11 +147,9 @@ export const projects: Project[] = [
     ],
     tags: ["Website", "Frontend Developer"],
   },
-  */
 ];
 
 /** Newest first, oldest last */
 export const projectsByDate = [...projects].sort(
-  (a, b) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
 );

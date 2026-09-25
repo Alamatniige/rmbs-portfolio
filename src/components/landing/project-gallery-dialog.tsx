@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { format } from "date-fns";
-import { ChevronLeftIcon, ChevronRightIcon, ExternalLinkIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
 
 import type { Project } from "@/data/projects";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -70,133 +70,117 @@ export default function ProjectGalleryDialog({
 
   if (!activeImage) return null;
 
-  const formattedDate = format(new Date(project.createdAt), "MMMM yyyy");
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        showCloseButton
+        showCloseButton={false}
+        overlayClassName="bg-black/90 backdrop-blur-md"
         className={cn(
-          "flex max-h-dvh flex-col gap-0 overflow-hidden p-0",
-          "max-lg:fixed max-lg:inset-0 max-lg:h-dvh max-lg:max-h-dvh max-lg:w-screen max-lg:max-w-none max-lg:translate-none max-lg:rounded-none",
-          "lg:top-1/2 lg:left-1/2 lg:h-[min(92vh,900px)] lg:max-h-[92vh] lg:w-full lg:max-w-[min(96vw,1100px)] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:flex-row lg:rounded-lg"
+          "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex h-[min(94vh,960px)] max-h-[94vh] w-[min(96vw,1300px)] max-w-[min(96vw,1300px)] sm:max-w-[min(96vw,1300px)] flex-col items-center justify-between border-0 bg-transparent p-3 sm:p-5 text-white shadow-none ring-0 outline-none rounded-none",
         )}
       >
-        <DialogTitle className="sr-only">{project.title}</DialogTitle>
+        <DialogTitle className="sr-only">
+          {project.title} screenshot gallery
+        </DialogTitle>
 
-        <div className="relative flex min-h-[40vh] flex-1 flex-col bg-background max-lg:min-h-0 lg:min-h-0 lg:min-w-0 lg:basis-[62%]">
-          <div className="relative min-h-[35vh] flex-1 lg:min-h-0">
+        {/* Top Header Bar */}
+        <div className="z-20 flex w-full items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 font-mono text-xs tracking-wider text-white/90 uppercase backdrop-blur-md">
+              {project.title}
+              {imageCount > 1 && (
+                <span className="ml-2 text-white/60">
+                  {safeIndex + 1} / {imageCount}
+                </span>
+              )}
+            </span>
+          </div>
+
+          <DialogClose asChild>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="size-10 rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/25 hover:text-white"
+            >
+              <XIcon className="size-5" />
+              <span className="sr-only">Close gallery</span>
+            </Button>
+          </DialogClose>
+        </div>
+
+        {/* Central Main Image Area */}
+        <div className="relative flex min-h-0 w-full flex-1 items-center justify-center p-2 sm:p-4">
+          <div className="relative h-full w-full max-w-6xl">
             <Image
               key={activeImage.src}
               src={activeImage.src}
               alt={activeImage.alt}
               fill
-              className="object-contain p-3 sm:p-6"
-              sizes="(max-width: 1024px) 100vw, 65vw"
+              className="object-contain"
+              sizes="95vw"
               priority
             />
-
-            {imageCount > 1 && (
-              <>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="icon"
-                  className="absolute top-1/2 left-2 z-10 size-11 -translate-y-1/2 bg-background/80 backdrop-blur-sm sm:left-3"
-                  onClick={goPrev}
-                  aria-label="Previous image"
-                >
-                  <ChevronLeftIcon />
-                </Button>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  size="icon"
-                  className="absolute top-1/2 right-2 z-10 size-11 -translate-y-1/2 bg-background/80 backdrop-blur-sm sm:right-3"
-                  onClick={goNext}
-                  aria-label="Next image"
-                >
-                  <ChevronRightIcon />
-                </Button>
-              </>
-            )}
           </div>
 
+          {/* Previous / Next Arrow Controls */}
           {imageCount > 1 && (
-            <div className="flex shrink-0 snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-4 lg:px-6">
-              {images.map((image, index) => (
+            <>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute left-2 sm:left-4 z-20 size-11 sm:size-12 rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-transform hover:bg-white/25 hover:text-white active:scale-90"
+                onClick={goPrev}
+                aria-label="Previous image"
+              >
+                <ChevronLeftIcon className="size-6" />
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-2 sm:right-4 z-20 size-11 sm:size-12 rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition-transform hover:bg-white/25 hover:text-white active:scale-90"
+                onClick={goNext}
+                aria-label="Next image"
+              >
+                <ChevronRightIcon className="size-6" />
+              </Button>
+            </>
+          )}
+        </div>
+
+        {/* Bottom Thumbnails Strip */}
+        {imageCount > 1 && (
+          <div className="z-20 flex shrink-0 max-w-full items-center justify-center gap-2 overflow-x-auto px-4 pt-2 pb-1">
+            {images.map((image, index) => {
+              const isSelected = safeIndex === index;
+              return (
                 <button
                   key={image.src}
                   type="button"
                   onClick={() => setActiveIndex(index)}
                   className={cn(
-                    "relative h-14 w-20 shrink-0 snap-start overflow-hidden rounded-md transition-all",
-                    safeIndex === index
-                      ? "ring-2 ring-primary ring-offset-2 ring-offset-background"
-                      : "opacity-50 hover:opacity-100"
+                    "relative h-14 w-20 sm:h-16 sm:w-24 shrink-0 overflow-hidden rounded-lg border border-white/10 transition-all duration-200 cursor-pointer",
+                    isSelected
+                      ? "ring-2 ring-white ring-offset-2 ring-offset-black scale-105 opacity-100"
+                      : "opacity-40 hover:opacity-85",
                   )}
-                  aria-label={`View image ${index + 1}`}
-                  aria-current={safeIndex === index}
+                  aria-label={`View screenshot ${index + 1}`}
+                  aria-current={isSelected}
                 >
                   <Image
                     src={image.src}
                     alt=""
                     fill
                     className="object-cover"
-                    sizes="80px"
+                    sizes="100px"
                   />
                 </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <aside className="flex max-h-[45vh] shrink-0 flex-col overflow-hidden border-t border-border/50 bg-card/30 lg:max-h-none lg:w-[38%] lg:border-t-0 lg:border-l">
-          <div className="flex flex-1 flex-col gap-6 overflow-y-auto p-5 pt-12 sm:p-8 sm:pt-8">
-            <div>
-              <p className="font-mono text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                {formattedDate}
-              </p>
-              <h2 className="font-heading mt-3 text-xl font-bold leading-tight tracking-tight text-foreground sm:text-2xl lg:text-3xl">
-                {project.title}
-              </h2>
-            </div>
-
-            {project.description && (
-              <p className="font-sans text-sm leading-relaxed text-muted-foreground sm:text-base">
-                {project.description}
-              </p>
-            )}
-
-            {project.tags && project.tags.length > 0 && (
-              <ul className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-md border border-border/50 px-2.5 py-1 font-mono text-[0.65rem] tracking-wider text-muted-foreground uppercase"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {project.liveUrl && (
-              <div className="mt-auto pt-2">
-                <Button asChild className="w-full">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Visit live site
-                    <ExternalLinkIcon />
-                  </a>
-                </Button>
-              </div>
-            )}
+              );
+            })}
           </div>
-        </aside>
+        )}
       </DialogContent>
     </Dialog>
   );

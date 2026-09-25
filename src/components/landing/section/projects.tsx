@@ -213,13 +213,13 @@ export default function Projects() {
               data-projects-reveal
               className="font-mono text-xs tracking-[0.15em] text-muted-foreground uppercase sm:tracking-[0.25em]"
             >
-              Projects
+              Featured Work
             </p>
             <h2
               data-projects-reveal
               className="font-heading mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
             >
-              Selected work
+              Projects I&apos;ve Built
             </h2>
             <div
               data-projects-reveal
@@ -230,8 +230,7 @@ export default function Projects() {
               data-projects-reveal
               className="mt-6 font-sans text-base leading-relaxed text-muted-foreground"
             >
-              Explore selected projects in the slideshow. Click a card to browse
-              screenshots or launch live deployed builds.
+              Applications and products built from concept to deployment.
             </p>
           </div>
 
